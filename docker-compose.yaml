@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  nuget-server:
+    image: loicsharma/baget
+    container_name: nuget-registry
+    restart: always
+    ports:
+      - "5555:80"
+    environment:
+      - ApiKey=6666666666666666666666666666
+      - Storage__Type=FileSystem
+      - Storage__Path=/var/baget/packages
+      - Database__Type=Sqlite
+      - Database__ConnectionString=Data Source=/var/baget/baget.db
+      - Search__Type=Database
+    volumes:
+      - "./baget-data:/var/baget"
